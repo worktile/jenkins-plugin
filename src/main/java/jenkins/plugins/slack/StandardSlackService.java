@@ -19,16 +19,11 @@ public class StandardSlackService implements SlackService {
 
     private static final Logger logger = Logger.getLogger(StandardSlackService.class.getName());
 
-    private String host = "slack.com";
     private String teamDomain;
-    private String token;
-    private String[] roomIds;
 
-    public StandardSlackService(String teamDomain, String token, String roomId) {
+    public StandardSlackService(String teamDomain) {
         super();
         this.teamDomain = teamDomain;
-        this.token = token;
-        this.roomIds = roomId.split("[,; ]+");
     }
 
     public boolean publish(String message) {
@@ -96,9 +91,5 @@ public class StandardSlackService implements SlackService {
             }
         }
         return client;
-    }
-
-    void setHost(String host) {
-        this.host = host;
     }
 }

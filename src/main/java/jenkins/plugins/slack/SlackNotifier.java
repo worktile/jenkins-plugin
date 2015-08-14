@@ -179,7 +179,7 @@ public class SlackNotifier extends Notifier {
         authToken = env.expand(authToken);
         room = env.expand(room);
 
-        return new StandardSlackService(teamDomain, authToken, room);
+        return new StandardSlackService(teamDomain);
     }
 
     @Override
@@ -285,7 +285,7 @@ public class SlackNotifier extends Notifier {
         }
 
         SlackService getSlackService(final String teamDomain, final String authToken, final String room) {
-            return new StandardSlackService(teamDomain, authToken, room);
+            return new StandardSlackService(teamDomain);
         }
 
         @Override
