@@ -1,4 +1,4 @@
-package jenkins.plugins.slack;
+package jenkins.plugins.lesschat;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpStatus;
@@ -15,13 +15,13 @@ import hudson.ProxyConfiguration;
 import org.apache.commons.httpclient.UsernamePasswordCredentials;
 import org.apache.commons.httpclient.auth.AuthScope;
 
-public class StandardSlackService implements SlackService {
+public class StandardLesschatService implements LesschatService {
 
-    private static final Logger logger = Logger.getLogger(StandardSlackService.class.getName());
+    private static final Logger logger = Logger.getLogger(StandardLesschatService.class.getName());
 
     private String teamDomain;
 
-    public StandardSlackService(String teamDomain) {
+    public StandardLesschatService(String teamDomain) {
         super();
         this.teamDomain = teamDomain;
     }
@@ -58,11 +58,11 @@ public class StandardSlackService implements SlackService {
             int responseCode = client.executeMethod(post);
             String response = post.getResponseBodyAsString();
             if(responseCode != HttpStatus.SC_OK) {
-                logger.log(Level.WARNING, "Slack post may have failed. Response: " + response);
+                logger.log(Level.WARNING, "lesschat post may have failed. Response: " + response);
                 result = false;
             }
         } catch (Exception e) {
-            logger.log(Level.WARNING, "Error posting to Slack", e);
+            logger.log(Level.WARNING, "Error posting to lesschat", e);
             result = false;
         } finally {
             logger.info("Posting succeeded");

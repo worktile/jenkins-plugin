@@ -1,4 +1,4 @@
-# Slack plugin for Jenkins - [![Build Status][jenkins-status]][jenkins-builds] [![Slack Signup][slack-badge]][slack-signup]
+# lesschat plugin for Jenkins - [![Build Status][jenkins-status]][jenkins-builds] [![lesschat Signup][lesschat-badge]][lesschat-signup]
 
 Started with a fork of the HipChat plugin:
 
@@ -8,8 +8,8 @@ Which was, in turn, a fork of the Campfire plugin.
 
 # Jenkins Instructions
 
-1. Get a Slack account: https://slack.com/
-2. Configure the Jenkins integration: https://my.slack.com/services/new/jenkins-ci
+1. Get a lesschat account: https://lesschat.com/
+2. Configure the Jenkins integration: https://my.lesschat.com/services/new/jenkins-ci
 3. Install this plugin on your Jenkins server
 4. Configure it in your Jenkins job and **add it as a Post-build action**.
 
@@ -22,11 +22,11 @@ Run unit tests
 
     mvn test
 
-Create an HPI file to install in Jenkins (HPI file will be in `target/slack.hpi`).
+Create an HPI file to install in Jenkins (HPI file will be in `target/lesschat.hpi`).
 
     mvn package
 
-[jenkins-builds]: https://jenkins.ci.cloudbees.com/job/plugins/job/slack-plugin/
-[jenkins-status]: https://jenkins.ci.cloudbees.com/buildStatus/icon?job=plugins/slack-plugin
-[slack-badge]: https://jenkins-slack-testing-signup.herokuapp.com/badge.svg
-[slack-signup]: https://jenkins-slack-testing-signup.herokuapp.com/
+[jenkins-builds]: https://jenkins.ci.cloudbees.com/job/plugins/job/lesschat-plugin/
+[jenkins-status]: https://jenkins.ci.cloudbees.com/buildStatus/icon?job=plugins/lesschat-plugin
+[lesschat-badge]: https://jenkins-lesschat-testing-signup.herokuapp.com/badge.svg
+[lesschat-signup]: https://jenkins-lesschat-testing-signup.herokuapp.com/

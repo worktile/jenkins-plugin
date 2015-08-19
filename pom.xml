@@ -39,7 +39,7 @@
     <scm>
         <connection>scm:git:ssh://git@github.com/lesschat/jenkins-plugin.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/lesschat/jenkins-plugin.git</developerConnection>
-        <url>https://github.com/jenkinsci/jenkins-plugin</url>
+        <url>https://github.com/lesschat/jenkins-plugin</url>
         <tag>HEAD</tag>
     </scm>
 
@@ -118,16 +118,16 @@
 
     <!--
       The developers show up as current maintainers in the Jenkins wiki.
-      https://wiki.jenkins-ci.org/display/JENKINS/Slack+Plugin
+      https://wiki.jenkins-ci.org/display/JENKINS/lesschat+Plugin
 
       The id should be the jenkinsci.org username and not your GitHub username.
     -->
     <developers>
         <developer>
-            <id>sag47</id>
-            <name>Sam Gleske</name>
-            <email>sam.mxracer@gmail.com</email>
-            <url>https://github.com/samrocketman</url>
+            <id>glj1102</id>
+            <name>gonglinjie</name>
+            <email>gonglinjie@worktile.com</email>
+            <url>https://github.com/glj1102</url>
             <roles>
                 <role>maintainer</role>
             </roles>

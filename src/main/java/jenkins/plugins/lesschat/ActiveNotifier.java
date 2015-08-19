@@ -1,4 +1,4 @@
-package jenkins.plugins.slack;
+package jenkins.plugins.lesschat;
 
 import hudson.EnvVars;
 import hudson.model.AbstractBuild;
@@ -30,19 +30,19 @@ import static java.util.logging.Level.SEVERE;
 @SuppressWarnings("rawtypes")
 public class ActiveNotifier implements FineGrainedNotifier {
 
-    private static final Logger logger = Logger.getLogger(SlackListener.class.getName());
+    private static final Logger logger = Logger.getLogger(LesschatListener.class.getName());
 
-    SlackNotifier notifier;
+    LesschatNotifier notifier;
     BuildListener listener;
 
-    public ActiveNotifier(SlackNotifier notifier, BuildListener listener) {
+    public ActiveNotifier(LesschatNotifier notifier, BuildListener listener) {
         super();
         this.notifier = notifier;
         this.listener = listener;
     }
 
-    private SlackService getSlack(AbstractBuild r) {
-        return notifier.newSlackService(r, listener);
+    private LesschatService getlesschat(AbstractBuild r) {
+        return notifier.newlesschatService(r, listener);
     }
 
     public void deleted(AbstractBuild r) {
@@ -75,9 +75,9 @@ public class ActiveNotifier implements FineGrainedNotifier {
         AbstractProject<?, ?> project = build.getProject();
         AbstractBuild<?, ?> previousBuild = project.getLastBuild().getPreviousCompletedBuild();
         if (previousBuild == null) {
-            getSlack(build).publish(message, "good");
+            getlesschat(build).publish(message, "good");
         } else {
-            getSlack(build).publish(message, getBuildColor(previousBuild));
+            getlesschat(build).publish(message, getBuildColor(previousBuild));
         }
     }
 
@@ -102,10 +102,10 @@ public class ActiveNotifier implements FineGrainedNotifier {
                 && notifier.getNotifyBackToNormal())
                 || (result == Result.SUCCESS && notifier.getNotifySuccess())
                 || (result == Result.UNSTABLE && notifier.getNotifyUnstable())) {
-            getSlack(r).publish(getBuildStatusMessage(r, notifier.includeTestSummary(),
+            getlesschat(r).publish(getBuildStatusMessage(r, notifier.includeTestSummary(),
                     notifier.includeCustomMessage()), getBuildColor(r));
             if (notifier.getShowCommitList()) {
-                getSlack(r).publish(getCommitList(r), getBuildColor(r));
+                getlesschat(r).publish(getCommitList(r), getBuildColor(r));
             }
         }
     }
@@ -206,10 +206,10 @@ public class ActiveNotifier implements FineGrainedNotifier {
     public static class MessageBuilder {
 
         private StringBuffer message;
-        private SlackNotifier notifier;
+        private LesschatNotifier notifier;
         private AbstractBuild build;
 
-        public MessageBuilder(SlackNotifier notifier, AbstractBuild build) {
+        public MessageBuilder(LesschatNotifier notifier, AbstractBuild build) {
             this.notifier = notifier;
             this.message = new StringBuffer();
             this.build = build;

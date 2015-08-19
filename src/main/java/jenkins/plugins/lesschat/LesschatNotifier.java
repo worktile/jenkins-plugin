@@ -1,4 +1,4 @@
-package jenkins.plugins.slack;
+package jenkins.plugins.lesschat;
 
 import hudson.EnvVars;
 import hudson.Extension;
@@ -23,9 +23,9 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.logging.Logger;
 
-public class SlackNotifier extends Notifier {
+public class LesschatNotifier extends Notifier {
 
-    private static final Logger logger = Logger.getLogger(SlackNotifier.class.getName());
+    private static final Logger logger = Logger.getLogger(LesschatNotifier.class.getName());
 
     private String teamDomain;
     private String authToken;
@@ -125,7 +125,7 @@ public class SlackNotifier extends Notifier {
     }
 
     @DataBoundConstructor
-    public SlackNotifier(final String teamDomain, final String authToken, final String room, final String buildServerUrl,
+    public LesschatNotifier(final String teamDomain, final String authToken, final String room, final String buildServerUrl,
                          final String sendAs, final boolean startNotification, final boolean notifyAborted, final boolean notifyFailure,
                          final boolean notifyNotBuilt, final boolean notifySuccess, final boolean notifyUnstable, final boolean notifyBackToNormal,
                          final boolean notifyRepeatedFailure, final boolean includeTestSummary, final boolean showCommitList,
@@ -154,7 +154,7 @@ public class SlackNotifier extends Notifier {
         return BuildStepMonitor.BUILD;
     }
 
-    public SlackService newSlackService(AbstractBuild r, BuildListener listener) {
+    public LesschatService newlesschatService(AbstractBuild r, BuildListener listener) {
         String teamDomain = this.teamDomain;
         if (StringUtils.isEmpty(teamDomain)) {
             teamDomain = getDescriptor().getTeamDomain();
@@ -179,7 +179,7 @@ public class SlackNotifier extends Notifier {
         authToken = env.expand(authToken);
         room = env.expand(room);
 
-        return new StandardSlackService(teamDomain);
+        return new StandardLesschatService(teamDomain);
     }
 
     @Override
@@ -192,9 +192,9 @@ public class SlackNotifier extends Notifier {
         if (startNotification) {
             Map<Descriptor<Publisher>, Publisher> map = build.getProject().getPublishersList().toMap();
             for (Publisher publisher : map.values()) {
-                if (publisher instanceof SlackNotifier) {
+                if (publisher instanceof LesschatNotifier) {
                     logger.info("Invoking Started...");
-                    new ActiveNotifier((SlackNotifier) publisher, listener).started(build);
+                    new ActiveNotifier((LesschatNotifier) publisher, listener).started(build);
                 }
             }
         }
@@ -245,34 +245,34 @@ public class SlackNotifier extends Notifier {
         }
 
         @Override
-        public SlackNotifier newInstance(StaplerRequest sr, JSONObject json) {
-            String teamDomain = sr.getParameter("slackTeamDomain");
-            String token = sr.getParameter("slackToken");
-            String room = sr.getParameter("slackRoom");
-            boolean startNotification = "true".equals(sr.getParameter("slackStartNotification"));
-            boolean notifySuccess = "true".equals(sr.getParameter("slackNotifySuccess"));
-            boolean notifyAborted = "true".equals(sr.getParameter("slackNotifyAborted"));
-            boolean notifyNotBuilt = "true".equals(sr.getParameter("slackNotifyNotBuilt"));
-            boolean notifyUnstable = "true".equals(sr.getParameter("slackNotifyUnstable"));
-            boolean notifyFailure = "true".equals(sr.getParameter("slackNotifyFailure"));
-            boolean notifyBackToNormal = "true".equals(sr.getParameter("slackNotifyBackToNormal"));
-            boolean notifyRepeatedFailure = "true".equals(sr.getParameter("slackNotifyRepeatedFailure"));
+        public LesschatNotifier newInstance(StaplerRequest sr, JSONObject json) {
+            String teamDomain = sr.getParameter("lesschatTeamDomain");
+            String token = sr.getParameter("lesschatToken");
+            String room = sr.getParameter("lesschatRoom");
+            boolean startNotification = "true".equals(sr.getParameter("lesschatStartNotification"));
+            boolean notifySuccess = "true".equals(sr.getParameter("lesschatNotifySuccess"));
+            boolean notifyAborted = "true".equals(sr.getParameter("lesschatNotifyAborted"));
+            boolean notifyNotBuilt = "true".equals(sr.getParameter("lesschatNotifyNotBuilt"));
+            boolean notifyUnstable = "true".equals(sr.getParameter("lesschatNotifyUnstable"));
+            boolean notifyFailure = "true".equals(sr.getParameter("lesschatNotifyFailure"));
+            boolean notifyBackToNormal = "true".equals(sr.getParameter("lesschatNotifyBackToNormal"));
+            boolean notifyRepeatedFailure = "true".equals(sr.getParameter("lesschatNotifyRepeatedFailure"));
             boolean includeTestSummary = "true".equals(sr.getParameter("includeTestSummary"));
-            boolean showCommitList = "true".equals(sr.getParameter("slackShowCommitList"));
+            boolean showCommitList = "true".equals(sr.getParameter("lesschatShowCommitList"));
             boolean includeCustomMessage = "on".equals(sr.getParameter("includeCustomMessage"));
             String customMessage = sr.getParameter("customMessage");
-            return new SlackNotifier(teamDomain, token, room, buildServerUrl, sendAs, startNotification, notifyAborted,
+            return new LesschatNotifier(teamDomain, token, room, buildServerUrl, sendAs, startNotification, notifyAborted,
                     notifyFailure, notifyNotBuilt, notifySuccess, notifyUnstable, notifyBackToNormal, notifyRepeatedFailure,
                     includeTestSummary, showCommitList, includeCustomMessage, customMessage);
         }
 
         @Override
         public boolean configure(StaplerRequest sr, JSONObject formData) throws FormException {
-            teamDomain = sr.getParameter("slackTeamDomain");
-            token = sr.getParameter("slackToken");
-            room = sr.getParameter("slackRoom");
-            buildServerUrl = sr.getParameter("slackBuildServerUrl");
-            sendAs = sr.getParameter("slackSendAs");
+            teamDomain = sr.getParameter("lesschatTeamDomain");
+            token = sr.getParameter("lesschatToken");
+            room = sr.getParameter("lesschatRoom");
+            buildServerUrl = sr.getParameter("lesschatBuildServerUrl");
+            sendAs = sr.getParameter("lesschatSendAs");
             if(buildServerUrl == null || buildServerUrl == "") {
                 JenkinsLocationConfiguration jenkinsConfig = new JenkinsLocationConfiguration();
                 buildServerUrl = jenkinsConfig.getUrl();
@@ -284,8 +284,8 @@ public class SlackNotifier extends Notifier {
             return super.configure(sr, formData);
         }
 
-        SlackService getSlackService(final String teamDomain, final String authToken, final String room) {
-            return new StandardSlackService(teamDomain);
+        LesschatService getlesschatService(final String teamDomain, final String authToken, final String room) {
+            return new StandardLesschatService(teamDomain);
         }
 
         @Override
@@ -293,10 +293,10 @@ public class SlackNotifier extends Notifier {
             return "Lesschat Notifications";
         }
 
-        public FormValidation doTestConnection(@QueryParameter("slackTeamDomain") final String teamDomain,
-                                               @QueryParameter("slackToken") final String authToken,
-                                               @QueryParameter("slackRoom") final String room,
-                                               @QueryParameter("slackBuildServerUrl") final String buildServerUrl) throws FormException {
+        public FormValidation doTestConnection(@QueryParameter("lesschatTeamDomain") final String teamDomain,
+                                               @QueryParameter("lesschatToken") final String authToken,
+                                               @QueryParameter("lesschatRoom") final String room,
+                                               @QueryParameter("lesschatBuildServerUrl") final String buildServerUrl) throws FormException {
             try {
                 String targetDomain = teamDomain;
                 if (StringUtils.isEmpty(targetDomain)) {
@@ -314,9 +314,9 @@ public class SlackNotifier extends Notifier {
                 if (StringUtils.isEmpty(targetBuildServerUrl)) {
                     targetBuildServerUrl = this.buildServerUrl;
                 }
-                SlackService testSlackService = getSlackService(targetDomain, targetToken, targetRoom);
+                LesschatService testlesschatService = getlesschatService(targetDomain, targetToken, targetRoom);
                 String message = "Lesschat/Jenkins plugin: you're all set on " + targetBuildServerUrl;
-                boolean success = testSlackService.publish(message, "good");
+                boolean success = testlesschatService.publish(message, "good");
                 return success ? FormValidation.ok("Success") : FormValidation.error("Failure");
             } catch (Exception e) {
                 return FormValidation.error("Client error : " + e.getMessage());

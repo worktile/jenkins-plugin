@@ -3,21 +3,21 @@
 New Features:
 
 * Option to add a custom message (#49, #78)
-* Build Server URL defaults to Jenkins URL when the slack plugin is first
+* Build Server URL defaults to Jenkins URL when the lesschat plugin is first
   configured (#42, #90)
 
 UI Improvements:
 
-* Move `Test Connection` button in slack job config to the advanced section
+* Move `Test Connection` button in lesschat job config to the advanced section
   (#64)
 * Improvements to `Test Connection` button.  It now provides feedback in the
-  Jenkins UI when it succeeds or fails to connect to the slack instance (#51,
+  Jenkins UI when it succeeds or fails to connect to the lesschat instance (#51,
   #81)
 
 Improvements:
 
 * Improve 'started' message with proper cause (#37)
-* The separator for specifying posting to multiple slack channels is more
+* The separator for specifying posting to multiple lesschat channels is more
   robust.  It now allows spaces, commas, and semicolons as a separator (#56)
 * Notifications start with full project name when using Cloudbees folders
   plugin.  This includes the folder and the project in the notification (#61)
@@ -44,7 +44,7 @@ New features:
   * Post a list of commits with the build notification (title and author of
     commit) (#30, #44, #45)
   * Include JUnit test summary in build notifications (#25)
-* Use colors when sending a message using slack (#20, #24).  Also, the start
+* Use colors when sending a message using lesschat (#20, #24).  Also, the start
   notifications use the color of the last build result (#43)
 * Support for authenticated proxies (#14)
 * Test Connection button (#46, #28)
@@ -57,7 +57,7 @@ Improvements:
 
 Bug fixes:
 
-* When changing the global slack settings the slack config in jobs are updated
+* When changing the global lesschat settings the lesschat config in jobs are updated
   as well (#26, #12)
-* Fix NullPointerException and output log message if slack is not configured
+* Fix NullPointerException and output log message if lesschat is not configured
   (#35, JENKINS-26066)

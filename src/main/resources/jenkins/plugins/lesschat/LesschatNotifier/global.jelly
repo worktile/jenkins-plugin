@@ -2,11 +2,11 @@
 
 <f:section title="Global Lesschat Notifier Settings" name="lesschat">
     <f:entry title="Webhook URL">
-        <f:textbox field="teamDomain" name="slackTeamDomain" value="${descriptor.getTeamDomain()}" />
+        <f:textbox field="teamDomain" name="lesschatTeamDomain" value="${descriptor.getTeamDomain()}" />
     </f:entry>
   
     <f:validateButton
         title="${%Test Connection}" progress="${%Testing...}"
-        method="testConnection" with="slackTeamDomain" />
+        method="testConnection" with="lesschatTeamDomain" />
   </f:section>
 </j:jelly>

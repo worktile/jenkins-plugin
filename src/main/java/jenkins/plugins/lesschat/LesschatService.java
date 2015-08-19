@@ -1,6 +1,6 @@
-package jenkins.plugins.slack;
+package jenkins.plugins.lesschat;
 
-public interface SlackService {
+public interface LesschatService {
     boolean publish(String message);
 
     boolean publish(String message, String color);
