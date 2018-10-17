@@ -16,6 +16,7 @@ import hudson.tasks.test.AbstractTestResultAction;
 import hudson.triggers.SCMTrigger;
 import hudson.util.LogTaskListener;
 import org.apache.commons.lang.StringUtils;
+import org.jenkinsci.plugins.displayurlapi.DisplayURLProvider;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -271,8 +272,9 @@ public class ActiveNotifier implements FineGrainedNotifier {
         }
 
         public MessageBuilder appendOpenLink() {
-            String url = notifier.getBuildServerUrl() + build.getUrl();
-            message.append(" (<").append(url).append("|Open>)");
+            String url = DisplayURLProvider.get().getRunURL(build);
+            // String url = notifier.getBuildServerUrl() + build.getUrl();
+            message.append(" ([").append(url).append("|Open])");
             return this;
         }
 
