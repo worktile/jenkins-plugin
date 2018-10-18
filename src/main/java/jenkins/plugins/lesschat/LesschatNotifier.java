@@ -63,7 +63,7 @@ public class LesschatNotifier extends Notifier {
     }
 
     public String getBuildServerUrl() {
-        if(buildServerUrl == null || buildServerUrl == "") {
+        if(buildServerUrl == null || "".equals(buildServerUrl)) {
             JenkinsLocationConfiguration jenkinsConfig = new JenkinsLocationConfiguration();
             return jenkinsConfig.getUrl();
         }
