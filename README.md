@@ -1,6 +1,6 @@
-# lesschat plugin for Jenkins 
+# Worktile plugin for Jenkins 
 
-# Developer instructions
+## Developer instructions
 
 Install Maven and JDK.  This was last build with Maven 3.2.5 and OpenJDK
 1.7.0\_75 on KUbuntu 14.04.
